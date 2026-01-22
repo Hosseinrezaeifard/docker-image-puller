@@ -1,4 +1,4 @@
-name: Export n8n Docker Image
+name: Export ntfy Docker Image
 
 on:
   workflow_dispatch:
@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Pull n8n image
-        run: docker pull n8nio/n8n:latest
+      - name: Pull ntfy image
+        run: docker pull binwiederhier/ntfy:latest
 
-      - name: Save n8n image
-        run: docker save n8nio/n8n:latest -o n8n_latest.tar
+      - name: Save ntfy image
+        run: docker save binwiederhier/ntfy:latest -o ntfy_latest.tar
 
-      - name: Compress image (smaller download)
-        run: gzip -9 n8n_latest.tar
+      - name: Compress image
+        run: gzip -9 ntfy_latest.tar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: n8n-docker-image
-          path: n8n_latest.tar.gz
+          name: ntfy-docker-image
+          path: ntfy_latest.tar.gz
