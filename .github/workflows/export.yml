@@ -1,4 +1,4 @@
-name: Export ntfy Docker Image
+name: Export Postgres Docker Image
 
 on:
   workflow_dispatch:
@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Pull ntfy image
-        run: docker pull binwiederhier/ntfy:latest
+      - name: Pull Postgres image
+        run: docker pull postgres:latest
 
-      - name: Save ntfy image
-        run: docker save binwiederhier/ntfy:latest -o ntfy_latest.tar
+      - name: Save Postgres image
+        run: docker save postgres:latest -o postgres_latest.tar
 
       - name: Compress image
-        run: gzip -9 ntfy_latest.tar
+        run: gzip -9 postgres_latest.tar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ntfy-docker-image
-          path: ntfy_latest.tar.gz
+          name: postgres-docker-image
+          path: postgres_latest.tar.gz
